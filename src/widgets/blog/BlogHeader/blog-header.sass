@@ -1,0 +1,19 @@
+.blog-wrapper
+  grid-template-columns: auto auto 1fr
+  justify-items: end
+  align-items: center
+
+
+@media (max-width: 800px)
+  .blog-wrapper
+    grid-template-columns: 1fr 1fr
+    justify-items: normal
+    gap: 10px
+
+  .controller
+    grid-column: 2 / 3
+    grid-row: 1 / 2
+    justify-content: end
+
+  .search
+    grid-column: 1 / 3

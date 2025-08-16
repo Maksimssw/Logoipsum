@@ -1,0 +1,41 @@
+.mini
+  & .image
+    margin-bottom: 10px
+  & .description
+    margin-top: 10px
+
+.large
+  & .image
+    margin-bottom: 15px
+  & .title
+    font-size: 24px
+  & .description
+    margin-top: 15px
+
+
+.card-material
+  position: relative
+  &:after
+    content: ""
+    position: absolute
+    width: 4px
+    height: 4px
+    top: 50%
+    right: -13px
+    background-color: var(--color-gray-600)
+    border-radius: 50%
+    transform: translateY(-50%)
+  &:last-child:after
+    display: none
+
+@media (max-width: 475px)
+  .large
+    & .image
+      margin-bottom: 10px
+    & .title
+      font-size: 20px
+    & .description
+      font-size: 14px
+      line-height: 20px
+
+

@@ -1,0 +1,32 @@
+.menu-link
+  font-weight: 600
+  color: var(--color-gray-100)
+  padding: 8px 14px
+  border-radius: 6px
+  cursor: pointer
+  transition: all .2s ease
+  &:hover
+    background-color: #FFFFFF1A
+    color: var(--color-primary)
+  &.active
+    background-color: #FFFFFF1A
+    color: var(--color-primary)
+
+.menu-mobile
+  position: absolute
+  top: 0
+  left: 0
+  align-items: start
+  width: 50%
+  height: 100%
+  background: var(--color-gray-900)
+  padding: 30px
+  transform: translateX(-100%)
+  transition: all .2s ease
+  z-index: 100
+  &_active
+    transform: translateX(0)
+
+.menu-mobile ul
+  display: grid
+  width: 100%

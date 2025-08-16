@@ -1,0 +1,8 @@
+export { default as TimeIcon } from './TimeIcon.vue'
+export { default as CommunicationIcon } from './CommunicationIcon.vue'
+export { default as PlusIcon } from './PlusIcon.vue'
+export { default as CheckIcon } from './CheckIcon.vue'
+export { default as ArrowIcon } from './ArrowIcon.vue'
+export { default as SearchListIcon } from './SearchListIcon.vue'
+export { default as CrossIcon } from './CrossIcon.vue'
+export { default as MagnifierIcon } from './MagnifierIcon.vue'
