@@ -43,7 +43,7 @@ export const getBlogTagsFilterMock = [
 
 export const getPostsMock = [
 	{
-		image: './public/assets/posts/post1.webp',
+		image: '/assets/posts/post1.webp',
 		id: 1,
 		date: '9 Апр',
 		time: '2 мин',
@@ -56,7 +56,7 @@ export const getPostsMock = [
 		]
 	},
 	{
-		image: './public/assets/posts/post2.webp',
+		image: '/assets/posts/post2.webp',
 		id: 2,
 		date: '6 Апр',
 		time: '3 мин',
@@ -69,7 +69,7 @@ export const getPostsMock = [
 		]
 	},
 	{
-		image: './public/assets/posts/post3.webp',
+		image: '/assets/posts/post3.webp',
 		id: 3,
 		date: '5 Апр',
 		time: '3 мин',
@@ -82,7 +82,7 @@ export const getPostsMock = [
 		]
 	},
 	{
-		image: './public/assets/posts/post4.webp',
+		image: '/assets/posts/post4.webp',
 		id: 4,
 		date: '4 Апр',
 		time: '15 мин',
@@ -95,7 +95,7 @@ export const getPostsMock = [
 		]
 	},
 	{
-		image: './public/assets/posts/post5.webp',
+		image: '/assets/posts/post5.webp',
 		id: 5,
 		date: '3 Апр',
 		time: '2 мин',
@@ -108,7 +108,7 @@ export const getPostsMock = [
 		]
 	},
 	{
-		image: './public/assets/posts/post6.webp',
+		image: '/assets/posts/post6.webp',
 		id: 6,
 		date: '1 Апр',
 		time: '4 мин',
@@ -122,7 +122,7 @@ export const getPostsMock = [
 		]
 	},
 	{
-		image: './public/assets/posts/post7.webp',
+		image: '/assets/posts/post7.webp',
 		id: 7,
 		date: '6 Апр',
 		time: '3 мин',
@@ -135,7 +135,7 @@ export const getPostsMock = [
 		]
 	},
 	{
-		image: './public/assets/posts/post8.webp',
+		image: '/assets/posts/post8.webp',
 		id: 8,
 		date: '5 Апр',
 		time: '3 мин',
@@ -148,7 +148,7 @@ export const getPostsMock = [
 		]
 	},
 	{
-		image: './public/assets/posts/post9.webp',
+		image: '/assets/posts/post9.webp',
 		id: 9,
 		date: '4 Апр',
 		time: '15 мин',
@@ -161,7 +161,7 @@ export const getPostsMock = [
 		]
 	},
 	{
-		image: './public/assets/posts/post10.webp',
+		image: '/assets/posts/post10.webp',
 		id: 10,
 		date: '3 Апр',
 		time: '2 мин',
@@ -174,7 +174,7 @@ export const getPostsMock = [
 		]
 	},
 	{
-		image: './public/assets/posts/post11.webp',
+		image: '/assets/posts/post11.webp',
 		id: 11,
 		date: '1 Апр',
 		time: '4 мин',
@@ -191,7 +191,7 @@ export const getPostsMock = [
 
 export const getPostByIdMock = {
 	'1': {
-		image: './public/assets/posts/post1.webp',
+		image: '/assets/posts/post1.webp',
 		id: 1,
 		date: '9 Апр',
 		time: '2 мин',
@@ -206,7 +206,7 @@ export const getPostByIdMock = {
 		comments: [
 			{
 				id: 1,
-				image: './public/assets/authors/author1.webp',
+				image: '/assets/authors/author1.webp',
 				author: 'Мира Гусева',
 				date: '9.04.2024 в 14:54',
 				text: 'Эти мгновения наполняют наши сердца радостью и любовью.'
@@ -214,7 +214,7 @@ export const getPostByIdMock = {
 		]
 	},
 	'2': {
-		image: './public/assets/posts/post2.webp',
+		image: '/assets/posts/post2.webp',
 		id: 2,
 		date: '6 Апр',
 		time: '3 мин',
@@ -228,7 +228,7 @@ export const getPostByIdMock = {
 		],
 		comments: Array(5)
 			.fill({
-				image: './public/assets/authors/author1.webp',
+				image: '/assets/authors/author1.webp',
 				author: 'Мира Гусева',
 				date: '6.04.2024 в 10:23',
 				text: 'Как же прекрасна тишина!'
@@ -238,7 +238,7 @@ export const getPostByIdMock = {
 			})
 	},
 	'3': {
-		image: './public/assets/posts/post3.webp',
+		image: '/assets/posts/post3.webp',
 		id: 3,
 		date: '5 Апр',
 		time: '3 мин',
@@ -252,7 +252,7 @@ export const getPostByIdMock = {
 		],
 		comments: Array(10)
 			.fill({
-				image: './public/assets/authors/author1.webp',
+				image: '/assets/authors/author1.webp',
 				author: 'Мира Гусева',
 				date: '5.04.2024 в 15:00',
 				text: 'Это произведение искусства завораживает.'
@@ -262,7 +262,7 @@ export const getPostByIdMock = {
 			})
 	},
 	'4': {
-		image: './public/assets/posts/post4.webp',
+		image: '/assets/posts/post4.webp',
 		id: 4,
 		date: '4 Апр',
 		time: '15 мин',
@@ -276,7 +276,7 @@ export const getPostByIdMock = {
 		],
 		comments: Array(6)
 			.fill({
-				image: './public/assets/authors/author1.webp',
+				image: '/assets/authors/author1.webp',
 				author: 'Мира Гусева',
 				date: '4.04.2024 в 12:30',
 				text: 'Как трогательно!'
@@ -286,7 +286,7 @@ export const getPostByIdMock = {
 			})
 	},
 	'5': {
-		image: './public/assets/posts/post5.webp',
+		image: '/assets/posts/post5.webp',
 		id: 5,
 		date: '3 Апр',
 		time: '2 мин',
@@ -300,7 +300,7 @@ export const getPostByIdMock = {
 		],
 		comments: Array(2)
 			.fill({
-				image: './public/assets/authors/author1.webp',
+				image: '/assets/authors/author1.webp',
 				author: 'Мира Гусева',
 				date: '3.04.2024 в 09:45',
 				text: 'Как красиво!'
@@ -310,7 +310,7 @@ export const getPostByIdMock = {
 			})
 	},
 	'6': {
-		image: './public/assets/posts/post6.webp',
+		image: '/assets/posts/post6.webp',
 		id: 6,
 		date: '1 Апр',
 		time: '4 мин',
@@ -326,7 +326,7 @@ export const getPostByIdMock = {
 		comments: []
 	},
 	'7': {
-		image: './public/assets/posts/post7.webp',
+		image: '/assets/posts/post7.webp',
 		id: 7,
 		date: '6 Апр',
 		time: '3 мин',
@@ -340,7 +340,7 @@ export const getPostByIdMock = {
 		],
 		comments: Array(5)
 			.fill({
-				image: './public/assets/authors/author1.webp',
+				image: '/assets/authors/author1.webp',
 				author: 'Мира Гусева',
 				date: '6.04.2024 в 14:00',
 				text: 'Как трогательно!'
@@ -350,7 +350,7 @@ export const getPostByIdMock = {
 			})
 	},
 	'8': {
-		image: './public/assets/posts/post8.webp',
+		image: '/assets/posts/post8.webp',
 		id: 8,
 		date: '5 Апр',
 		time: '3 мин',
@@ -364,7 +364,7 @@ export const getPostByIdMock = {
 		],
 		comments: Array(10)
 			.fill({
-				image: './public/assets/authors/author1.webp',
+				image: '/assets/authors/author1.webp',
 				author: 'Мира Гусева',
 				date: '5.04.2024 в 16:20',
 				text: 'Как трогательно!'
@@ -374,7 +374,7 @@ export const getPostByIdMock = {
 			})
 	},
 	'9': {
-		image: './public/assets/posts/post9.webp',
+		image: '/assets/posts/post9.webp',
 		id: 9,
 		date: '4 Апр',
 		time: '15 мин',
@@ -388,7 +388,7 @@ export const getPostByIdMock = {
 		],
 		comments: Array(6)
 			.fill({
-				image: './public/assets/authors/author1.webp',
+				image: '/assets/authors/author1.webp',
 				author: 'Мира Гусева',
 				date: '4.04.2024 в 17:10',
 				text: 'Как впечатляюще!'
@@ -398,7 +398,7 @@ export const getPostByIdMock = {
 			})
 	},
 	'10': {
-		image: './public/assets/posts/post10.webp',
+		image: '/assets/posts/post10.webp',
 		id: 10,
 		date: '3 Апр',
 		time: '2 мин',
@@ -412,7 +412,7 @@ export const getPostByIdMock = {
 		],
 		comments: Array(2)
 			.fill({
-				image: './public/assets/authors/author1.webp',
+				image: '/assets/authors/author1.webp',
 				author: 'Мира Гусева',
 				date: '3.04.2024 в 18:45',
 				text: 'Как же хочется лета!'
@@ -422,7 +422,7 @@ export const getPostByIdMock = {
 			})
 	},
 	'11': {
-		image: './public/assets/posts/post11.webp',
+		image: '/assets/posts/post11.webp',
 		id: 11,
 		date: '1 Апр',
 		time: '4 мин',
