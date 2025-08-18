@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import { computed, provide } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { AppPages, AppRoutes, EAppProviders } from '@/app/providers'
 import { Header } from '@/widgets/Header'
 
 import './style/tailwind.css'
 
 const route = useRoute()
-
-provide(EAppProviders.AppRoutes, AppRoutes)
-provide(EAppProviders.AppPages, AppPages)
 
 const layout = computed(() => route.meta.layout)
 </script>
@@ -26,8 +22,7 @@ const layout = computed(() => route.meta.layout)
 		</template>
 	</component>
 
-	<!-- FIX	-->
-	<div v-else>Загрузка компонента!</div>
+	<div v-else>Загрузка...</div>
 </template>
 
 <style lang="sass">

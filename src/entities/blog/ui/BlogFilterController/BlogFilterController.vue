@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { computed, onMounted } from 'vue'
 
-import { useBlogStore } from '@/entities/blog/model/store.ts'
+import { useBlogStore } from '@/entities/blog'
 import { ArrowIcon } from '@/shared/ui/icons/base'
 
 const blogStore = useBlogStore()
@@ -31,7 +31,7 @@ onMounted(blogStore.checkVisibleFilter)
 			Очистить
 		</button>
 
-		<button class="grid-row gap-[4px] cursor-pointer" @click="blogStore.toggleFilterHandler()">
+		<button class="grid-row gap-[4px] cursor-pointer" @click="blogStore.toggleFilter()">
 			<span class="text-[14px] text-gray-500">{{ buttonText }}</span>
 
 			<ArrowIcon :class="`${isVisibleFilter ? 'rotate-180' : ''} ease-linear duration-200`" />

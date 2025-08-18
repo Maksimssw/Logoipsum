@@ -3,9 +3,11 @@
 @theme {
     --color-gray-100: #f9f9f9;
     --color-gray-200: #F1F1F2;
+    --color-gray-300: #E3E5E8;
     --color-gray-400: #d8d8e5;
     --color-gray-500: #a1a5b7;
     --color-gray-600: #7e8299;
+    --color-gray-800: #3F4254;
     --color-gray-900: #181c32;
 
     --color-primary-light: #eef6ff;
@@ -16,6 +18,8 @@
 
     --color-primary-20: #3E97FF33;
     --color-primary-32: #3E97FF52;
+
+    --color-red-100: #F1416C;
 
     --breakpoint-md: 801px;
 }

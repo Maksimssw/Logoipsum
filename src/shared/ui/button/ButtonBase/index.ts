@@ -12,7 +12,7 @@ export const buttonBaseVariants = cva(
 				disable: 'bg-gray-100 text-gray-500 cursor-no-drop'
 			},
 			size: {
-				default: 'w-[120px] h-[38px]'
+				default: 'w-[120px] h-[38px] text-[13px]'
 			}
 		},
 		defaultVariants: {

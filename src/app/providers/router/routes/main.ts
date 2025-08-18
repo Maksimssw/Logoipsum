@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-import { MainLayout } from '@/shared/ui/layouts/MainLayout'
+import { MainLayout } from '@/shared/ui/layouts'
 
 export const routeName = 'Main'
 

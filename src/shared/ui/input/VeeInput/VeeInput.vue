@@ -18,7 +18,10 @@ interface IProps {
 	activeTxt?: boolean
 }
 
-const emit = defineEmits(['modelValue', 'blur', 'change'])
+const emit = defineEmits<{
+	(e: 'modelValue', value: string): void
+	(e: 'change'): void
+}>()
 
 const props = defineProps<IProps>()
 

@@ -1,20 +1,38 @@
 <script setup lang="ts">
+import type { IPost } from '@/entities/blog'
+import { pluralize } from '@/shared/lib/utils/string'
 import Card from '@/shared/ui/Card/Card.vue'
 import { CommunicationIcon, TimeIcon } from '@/shared/ui/icons/base'
+
+const emit = defineEmits<{
+	(e: 'modal'): void
+	(e: 'post', id: number): void
+}>()
+
+const props = defineProps<{ post: IPost }>()
+
+const clickHandler = () => {
+	emit('modal')
+	emit('post', props.post.id)
+}
 </script>
 
 <template>
 	<Card
+		@click="clickHandler"
 		structure="mini"
-		image-url="./public/assets/posts/post1.webp"
-		title="Вдохновение в каждом шаге"
+		:image-url="post.image"
+		:title="post.title"
 		class="cursor-pointer"
-		description="Наши путешественники находят вдохновение в каждом шаге своего пути."
-		:tags="['Природа', 'Люди']"
+		:description="post.shortDescription"
+		:tags="post.tags"
 		:materials="[
-			{ text: '9 Апр' },
-			{ component: TimeIcon, text: '2 мин' },
-			{ component: CommunicationIcon, text: '1 комментарий' }
+			{ text: post.date },
+			{ component: TimeIcon, text: post.time },
+			{
+				component: CommunicationIcon,
+				text: `${post.countComments} ` + pluralize(post.countComments, ['комментарий', 'комментария', 'комментариев'])
+			}
 		]"
 	/>
 </template>

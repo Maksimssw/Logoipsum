@@ -1,11 +1,11 @@
-import type { Ref } from 'vue'
+import type { ShallowRef } from 'vue'
 
 export interface IUseIsBoolean {
 	/**
 	 * isBoolean
 	 * Реактивное значение типа boolean.
 	 */
-	isBoolean: Ref<boolean>
+	isBoolean: ShallowRef<boolean>
 
 	/**
 	 * setIs

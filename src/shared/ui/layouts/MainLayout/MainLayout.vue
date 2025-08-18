@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
 	<slot name="header"></slot>
 
@@ -7,7 +5,3 @@
 		<slot></slot>
 	</main>
 </template>
-
-<style>
-@import './main-layout.sass';
-</style>

@@ -1,9 +1,9 @@
-import { ref } from 'vue'
+import { shallowRef } from 'vue'
 
 import type { IUseRefString } from './types.ts'
 
 export const useRefString = (init: string): IUseRefString => {
-	const value = ref(init)
+	const value = shallowRef(init)
 
 	const setValue = (newValue: string): void => {
 		value.value = newValue

@@ -5,19 +5,23 @@
     --header-height:    62px
     --container-indent: calc(50% - var(--container-width) / 2)
 
+
+
 *,
 *:before,
 *:after
     font-family: 'Inter', sans-serif
 
-
 li::marker
     display: none
-
 
 @media (max-width: 1300px)
     :root
         --container-indent: 10px
+
+@media (max-width: 800px)
+    :root
+        --header-height: 78px
 
 .container
     max-width: 100%
@@ -39,4 +43,3 @@ main
     grid-auto-flow: column
     align-items: center
     justify-content: start
-

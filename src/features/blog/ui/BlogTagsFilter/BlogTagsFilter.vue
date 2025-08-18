@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
 
-import { useBlogStore } from '@/entities/blog/model/store.ts'
+import { useBlogStore } from '@/entities/blog'
 import { useBlogLogic } from '@/features/blog'
 import { ButtonFilter } from '@/shared/ui/button'
 

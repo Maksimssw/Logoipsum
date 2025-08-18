@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useBreakpoints } from '@vueuse/core'
 
-import { HeaderMenu } from '@/entities/header'
-import { useHeaderStore } from '@/entities/header/model/store.ts'
-import BurgerIcon from '@/shared/ui/icons/base/BurgerIcon.vue'
+import { HeaderMenu, useHeaderStore } from '@/entities/header'
+import { ButtonIcon } from '@/shared/ui/button'
+import { BurgerIcon } from '@/shared/ui/icons/base'
 import { LogoIcon } from '@/shared/ui/icons/main'
 
 const breakpoints = useBreakpoints({ mobile: 800 })
@@ -12,11 +12,11 @@ const headerStore = useHeaderStore()
 </script>
 
 <template>
-	<header class="container bg-black h-[62px] grid-row">
+	<header class="container bg-black h-[62px] max-md:h-[78px] grid-row">
 		<div class="px-[6px] grid-row gap-[80px] max-[801px]:gap-[15px]">
-			<button v-if="isBurger" @click="headerStore.setTrueMenu()" class="cursor-pointer">
+			<ButtonIcon v-if="isBurger" @click="headerStore.showMenu()">
 				<BurgerIcon />
-			</button>
+			</ButtonIcon>
 
 			<router-link to="/" class="grid-row">
 				<LogoIcon />

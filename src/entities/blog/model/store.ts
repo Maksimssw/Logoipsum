@@ -1,67 +1,116 @@
 import { defineStore } from 'pinia'
+import { computed, watch } from 'vue'
 
-import type { IPost } from '@/entities/blog/model/types.ts'
+import type { IBlogStore, IFullPost, IPost } from '@/entities/blog'
 import { useLocalStorage } from '@/shared/lib/browser/localStorage'
 import { useQuery } from '@/shared/lib/browser/query'
 import { useIsBoolean, useReactiveArray, useRefString } from '@/shared/lib/use/base'
-import type { ITag } from '@/shared/ui/Tag/Tag.vue'
+import { useReactiveObject } from '@/shared/lib/use/base/object'
+import type { ITag } from '@/shared/ui/Tag'
 
 const namespace = 'blog'
 const TAGS_NAME = 'tags'
 const SEARCH_BLOG_NAME = 'search'
 
-export const useBlogStore = defineStore(namespace, () => {
+const fullPostDefault: IFullPost = {
+	id: 0,
+	image: '',
+	date: '',
+	time: '',
+	countComments: 0,
+	title: '',
+	description: '',
+	tags: [],
+	comments: []
+}
+
+/**
+ * Хук для управления состоянием блога.
+ * @description Предоставляет методы и состояние для работы с постами, тегами, поиском и фильтрами.
+ * @returns {IBlogStore} - Возвращает объект с состоянием, производными данными и методами для управления блогом.
+ */
+export const useBlogStore = defineStore(namespace, (): IBlogStore => {
+	// ===== UI-фильтр
 	const { isBoolean: isVisibleFilter, toggle: toggleFilter, setIs: setFilter } = useIsBoolean()
 	const { value: isVisibleFilterLS, setLSValue: setLSFilter } = useLocalStorage<boolean>(
 		'isVisibleFilter',
 		isVisibleFilter.value
 	)
 
-	const { array: allPosts, refresh: refreshAllPosts } = useReactiveArray<IPost>()
-	const { array: visiblePosts, refresh: refreshVisiblePosts } = useReactiveArray<IPost>()
+	watch(
+		() => isVisibleFilter.value,
+		v => setLSFilter(v),
+		{ immediate: true }
+	)
 
-	const { value: searchPost, setValue: setSearchPost } = useRefString('')
+	// ===== Данные
+	const { array: allPosts, refresh: refreshAllPosts } = useReactiveArray<IPost>()
 	const { array: tags, refresh: refreshTags } = useReactiveArray<ITag>()
+	const { value: searchPost, setValue: setSearchPost } = useRefString('')
+	const { object: fullPost, refresh: refreshPost } = useReactiveObject(fullPostDefault)
+
 	const { setQuery, getQuery } = useQuery()
+
+	// ===== Деривативы
+	const activeTagCodes = computed(() => tags.filter(t => t.active).map(t => t.code))
+
+	const visiblePosts = computed<IPost[]>(() => {
+		const searchText = searchPost.value.trim().toLowerCase()
+		const codes = activeTagCodes.value
+		const needTags = codes.length > 0
+		const activeSet = needTags ? new Set(codes) : null
+
+		if (!needTags && !searchText) return allPosts
+
+		return allPosts.filter(post => {
+			// ===== Фильтрация по тегам
+			if (needTags) {
+				const postCodes = new Set((post.tags || []).map(tag => tag.code))
+				for (const code of activeSet!) if (!postCodes.has(code)) return false
+			}
+
+			// ===== Фильтрация по пойску
+			if (searchText && !post.title?.toLowerCase().includes(searchText)) return false
+
+			return true
+		})
+	})
+
+	// ===== Методы
 
 	const changeActiveTag = async (index: number, active: boolean): Promise<void> => {
 		if (index >= 0 && index < tags.length) {
 			tags[index] = { ...tags[index], active }
 		}
 
-		const activeTags = tags
-			.filter(tag => tag.active)
-			.map(tag => tag.code)
+		const activeTagsCsv = tags
+			.filter(t => t.active)
+			.map(t => t.code)
 			.join(',')
 
-		await setQuery(TAGS_NAME, activeTags)
-		filterPosts()
+		await setQuery(TAGS_NAME, activeTagsCsv)
 	}
 
-	const getQueryTags = () => {
+	const getQueryTags = (): void => {
 		const queryTags = getQuery(TAGS_NAME) as string
-
 		if (!queryTags) return
 
-		const activeCodes = queryTags.split(',')
+		const activeCodes = new Set(queryTags.split(',').filter(Boolean))
 
 		for (let i = 0; i < tags.length; i++) {
-			tags[i].active = activeCodes.includes(tags[i].code)
+			const t = tags[i]
+			if (t) tags[i] = { ...t, active: activeCodes.has(t.code) }
 		}
 	}
 
-	const clearFilters = async () => {
+	const clearFilters = async (): Promise<void> => {
 		for (let i = 0; i < tags.length; i++) {
-			tags[i].active = false
+			const tag = tags[i]
+
+			if (tag?.active) tags[i] = { ...tag, active: false }
 		}
 
 		await setQuery(TAGS_NAME, '')
-		filterPosts()
-	}
-
-	const toggleFilterHandler = (): void => {
-		toggleFilter()
-		setLSFilter(isVisibleFilter.value)
 	}
 
 	const checkVisibleFilter = (): void => {
@@ -72,49 +121,37 @@ export const useBlogStore = defineStore(namespace, () => {
 		const trimText = text.trim()
 		await setQuery(SEARCH_BLOG_NAME, trimText)
 		setSearchPost(trimText)
-		filterPosts()
 	}
 
 	const getQuerySearch = (): void => {
 		const querySearch = getQuery(SEARCH_BLOG_NAME) as string
-
 		if (!querySearch) return
-
 		setSearchPost(querySearch)
 	}
 
-	const filterPosts = (): void => {
-		const activeTagCodes = tags.filter(tag => tag.active).map(tag => tag.code)
-		let postsFilter = allPosts
-
-		if (activeTagCodes.length) {
-			postsFilter = postsFilter.filter(post =>
-				activeTagCodes.every(activeCode => post.tags.some(postTag => postTag.code === activeCode))
-			)
-		}
-
-		if (searchPost.value) {
-			postsFilter = postsFilter.filter(post => post.title.toLowerCase().includes(searchPost.value.toLowerCase()))
-		}
-
-		refreshVisiblePosts(postsFilter)
-	}
-
 	return {
+		// state
 		isVisibleFilter,
 		tags,
 		allPosts,
 		searchPost,
+		fullPost,
+
+		// derived
 		visiblePosts,
+
+		// loaders/setters
 		refreshAllPosts,
 		refreshTags,
+		refreshPost,
+
+		// actions
 		changeActiveTag,
 		clearFilters,
-		toggleFilterHandler,
+		toggleFilter,
 		checkVisibleFilter,
 		getQuerySearch,
 		setSearch,
-		filterPosts,
 		getQueryTags
 	}
 })

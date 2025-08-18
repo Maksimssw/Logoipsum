@@ -1,11 +1,11 @@
-import type { Ref } from 'vue'
+import type { ShallowRef } from 'vue'
 
 export interface IUseRefNumber {
 	/**
 	 * value
 	 * Реактивное числовое значение.
 	 */
-	value: Ref<number>
+	value: ShallowRef<number>
 
 	/**
 	 * setValue

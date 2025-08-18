@@ -1,15 +1,22 @@
 import { defineStore } from 'pinia'
 
+import type { IHeaderStore } from '@/entities/header/model/types.ts'
 import { useIsBoolean } from '@/shared/lib/use/base'
 
 const namespace = 'header'
 
-export const useHeaderStore = defineStore(namespace, () => {
-	const { isBoolean: isMenu, setFalse: setFalseMenu, setTrue: setTrueMenu } = useIsBoolean()
+/**
+ * Хук для управления состоянием заголовка (header).
+ * @description Предоставляет методы и состояние для работы с меню,
+ * включая отображение, скрытие и проверку видимости меню.
+ * @returns {IHeaderStore} - Возвращает объект с состоянием и методами для управления меню.
+ */
+export const useHeaderStore = defineStore(namespace, (): IHeaderStore => {
+	const { isBoolean: isMenu, setTrue: showMenu, setFalse: hideMenu } = useIsBoolean()
 
 	return {
 		isMenu,
-		setFalseMenu,
-		setTrueMenu
+		showMenu,
+		hideMenu
 	}
 })

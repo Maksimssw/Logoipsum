@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
 
-import { Tag } from '@/shared/ui/Tag'
-import type { ITag } from '@/shared/ui/Tag/Tag.vue'
+import { type ITag, Tag } from '@/shared/ui/Tag'
 import { Title } from '@/shared/ui/typography'
 
 interface IMaterials {
@@ -17,21 +16,26 @@ interface IProps {
 	structure?: 'mini' | 'large'
 	tags?: Omit<ITag, 'active'>[]
 	materials?: IMaterials[]
+	is?: 'li' | 'div'
 }
 
-defineProps<IProps>()
+withDefaults(defineProps<IProps>(), {
+	is: 'li',
+	structure: 'mini'
+})
 </script>
 
 <template>
-	<li :class="structure">
+	<component :is="is" :class="structure">
 		<img
 			:src="imageUrl"
 			v-if="imageUrl"
 			:alt="title"
 			class="image w-full rounded-xl h-[250px] max-lg:h-[220px] max-md:h-[200px]"
+			loading="lazy"
 		/>
 
-		<ul v-if="materials" class="flex gap-[25px]">
+		<ul v-if="materials" class="materials flex gap-[25px]">
 			<li v-for="material in materials" class="card-material grid-row gap-[4px]">
 				<component :is="material.component" v-if="material.component" />
 
@@ -39,16 +43,16 @@ defineProps<IProps>()
 			</li>
 		</ul>
 
-		<Title class="mb-[10px] title" v-if="title">{{ title }}</Title>
+		<Title class="title leading-none" v-if="title">{{ title }}</Title>
 
 		<p class="description mb-[10px] leading-[25px]" v-if="description">{{ description }}</p>
 
-		<ul v-if="tags?.length" class="flex gap-[10px]">
+		<ul v-if="tags?.length" class="tags flex gap-[10px]">
 			<Tag v-for="tag in tags" :key="tag.code">{{ tag.text }}</Tag>
 		</ul>
 
 		<slot />
-	</li>
+	</component>
 </template>
 
 <style lang="sass" scoped>

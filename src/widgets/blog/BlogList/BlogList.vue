@@ -1,36 +1,38 @@
 <script lang="ts" setup>
-import { onMounted } from 'vue'
+import { defineAsyncComponent, onMounted } from 'vue'
 
-import { useBlogStore } from '@/entities/blog/model/store.ts'
+import { BlogCard, BlogEmpty, useBlogStore } from '@/entities/blog'
 import { useBlogLogic } from '@/features/blog'
-import Card from '@/shared/ui/Card/Card.vue'
-import { CommunicationIcon, TimeIcon } from '@/shared/ui/icons/base'
+import { useSingleModal } from '@/shared/lib/use/modal/useSingleModal.ts'
 
-const { getPosts } = useBlogLogic()
+const BlogModalPost = defineAsyncComponent(() =>
+	import('@/widgets/blog/BlogModalPost').then(module => module.BlogModalPost)
+)
+
+const { getPosts, getFullPost } = useBlogLogic()
 const blogStore = useBlogStore()
+const { isModal, closeModal, openModal } = useSingleModal()
 
 onMounted(getPosts)
 </script>
 
 <template>
 	<section class="container">
-		<ul class="blog-list grid rounded-xl bg-white p-[30px] max-lg:p-[15px]">
-			<Card
-				v-for="post in blogStore.visiblePosts"
-				:key="post.id"
-				structure="mini"
-				:image-url="post.image"
-				:title="post.title"
-				class="cursor-pointer"
-				:description="post.shortDescription"
-				:tags="post.tags"
-				:materials="[
-					{ text: post.date },
-					{ component: TimeIcon, text: post.time },
-					{ component: CommunicationIcon, text: `${post.countComments} комментарий` }
-				]"
-			/>
-		</ul>
+		<div class="rounded-xl mt-[20px] bg-white p-[30px] max-lg:p-[15px]">
+			<ul class="blog-list grid" v-if="blogStore.visiblePosts.length">
+				<BlogCard
+					v-for="post in blogStore.visiblePosts"
+					:post="post"
+					:key="post.id"
+					@modal="openModal"
+					@post="getFullPost"
+				/>
+			</ul>
+
+			<BlogEmpty v-else />
+
+			<BlogModalPost v-if="isModal" @close="closeModal" />
+		</div>
 	</section>
 </template>
 

@@ -1,9 +1,9 @@
-import { ref } from 'vue'
+import { shallowRef } from 'vue'
 
 import type { IUseIsBoolean } from './types.ts'
 
 export const useIsBoolean = (init: boolean = false): IUseIsBoolean => {
-	const isBoolean = ref(init)
+	const isBoolean = shallowRef(init)
 
 	const setIs = (bool: boolean): void => {
 		isBoolean.value = bool

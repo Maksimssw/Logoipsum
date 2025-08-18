@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
-import { useBlogStore } from '@/entities/blog/model/store.ts'
-import SearchInput from '@/shared/ui/input/SearchInput/SearchInput.vue'
+import { useBlogStore } from '@/entities/blog'
+import { SearchInput } from '@/shared/ui/input/SearchInput'
 
 const storeBlog = useBlogStore()
 

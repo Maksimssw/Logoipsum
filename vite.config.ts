@@ -1,4 +1,3 @@
-// FIX
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'node:path'
