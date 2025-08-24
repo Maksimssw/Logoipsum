@@ -53,12 +53,12 @@ export const useBlogLogic = (): IUseBlogLogic => {
 		const comment: IComment = {
 			author: USER_NAME_MOCK,
 			date: formatDate(new Date()),
-			id: fullPost.comments.length + 1,
-			image: './public/assets/authors/author1.webp',
+			id: crypto.randomUUID(),
+			image: '/assets/authors/author1.webp',
 			text
 		}
 
-		fullPost.comments.push(comment)
+		fullPost.comments = [comment, ...fullPost.comments]
 		fullPost.countComments++
 	}
 
