@@ -2,6 +2,8 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
+import EmptyLayout from '@/shared/ui/layouts/EmptyLayout/EmptyLayout.vue'
+import { LoadingPage } from '@/shared/ui/loading'
 import { Header } from '@/widgets/Header'
 
 import './style/tailwind.css'
@@ -22,7 +24,9 @@ const layout = computed(() => route.meta.layout)
 		</template>
 	</component>
 
-	<div v-else>Загрузка...</div>
+	<EmptyLayout v-else>
+		<LoadingPage />
+	</EmptyLayout>
 </template>
 
 <style lang="sass">
