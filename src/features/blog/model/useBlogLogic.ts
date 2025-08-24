@@ -50,10 +50,12 @@ export const useBlogLogic = (): IUseBlogLogic => {
 	}
 
 	const newComment = (text: string) => {
+		const newId = fullPost.comments.length > 0 ? Math.max(...fullPost.comments.map(c => c.id)) + 1 : 1
+
 		const comment: IComment = {
 			author: USER_NAME_MOCK,
 			date: formatDate(new Date()),
-			id: crypto.randomUUID(),
+			id: newId,
 			image: '/assets/authors/author1.webp',
 			text
 		}
